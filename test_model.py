@@ -19,15 +19,12 @@ class toxicClassifier:
     def score_comment(self, comment):
         vectorized_comment = self.vectorizer([comment])
         result = self.loadModel.predict(vectorized_comment)
-        print(result)
+        print(result, comment)
 
         text = ''
         for index, col in enumerate(['toxic','severe_toxic','obscene','threat','insult','identity_hate']):
             text += "{}: {} ({})\n".format(col, result[0][index]>0.5, result[0][index])
         return text
-
-    def load_model(self, model_path):
-        self.loadModel = tf.keras.models.load_model(model_path)
 
     def displayGradio(self):
         gui = gr.Interface(fn=self.score_comment,
@@ -37,7 +34,7 @@ class toxicClassifier:
 
 
 model = toxicClassifier()
-model.load_model(os.path.join('models', 'toxicClassifier.h5'))
+model.loadModel = tf.keras.models.load_model(os.path.join('models', 'toxicClassifier.h5'))
 model.displayGradio()
 
 

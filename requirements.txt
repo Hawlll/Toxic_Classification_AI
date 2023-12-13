@@ -2,5 +2,5 @@ scikit-learn
 tensorflow (version 2.10) (Also need CUDA toolkit 11.2 and cuDNN 8.1)
 matplotlib
 pandas
-gradio
+
 
